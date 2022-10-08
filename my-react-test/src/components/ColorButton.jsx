@@ -4,6 +4,7 @@ function ColorButton(props) {
     }
     return (
         <button 
+            type="button"
             style={{
                 color: "lightgrey", 
                 background: props.color,

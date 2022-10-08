@@ -1,0 +1,10 @@
+.FavoriteColor-buttons {
+    align-self: stretch;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.FavoriteColor-buttons > * {
+    margin: 0.5em;
+}
