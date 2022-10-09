@@ -4,6 +4,7 @@ import Menubar from './components/Menubar.jsx';
 // import Button from './components/Button.jsx';
 // import List from './components/List';
 import FavoriteColor from './components/FavoriteColor';
+import Timer from './components/Timer';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <h1>Choose your favorite color</h1>
         <FavoriteColor /> 
         <p></p>
+        <Timer />
       </header>
     </div>
   );
