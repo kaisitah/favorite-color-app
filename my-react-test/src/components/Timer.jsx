@@ -1,25 +1,29 @@
 import { useState, useEffect, useCallback } from "react";
 
-function Timer () {
+function Timer(props) {
     const [count, setCount] = useState(0);
     useEffect(
         function setTimer() {
-            setTimeout(
+            !props.stopped && setTimeout(
                 function handleTick() {
                     setCount(count + 1);
                 },
                 1000
             );
         }, 
-        [count]
+        [props.stopped, count]
     ); 
-    return (
-        <p>{count} seconds</p>
-    );
+    return (<>
+            <p>{count} seconds</p>
+            {props.stopped && (count <= 5 ?
+                <p>That was fast, you must be pretty sure about your favorite color!</p> :
+                <p>Thanks, great choice!</p> 
+            )}
+    </>);
 }
 export default Timer;
 
-
+// eslint-disable-next-line no-unused-vars -- This is alternative component for Timer
 function TimerUseCallback() {
     const [count, setCount] = useState(0);
     const handleTick = useCallback(
