@@ -1,4 +1,4 @@
-name: Node.js CI
+name: Node.js CI and deploy to GitHub Pages
 
 on:
   push:
@@ -6,7 +6,13 @@ on:
   pull_request:
     branches: [ main ]
 
+# Allow one concurrent deployment
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
 jobs:
+  # Build job
   build:
 
     runs-on: ubuntu-latest
@@ -25,4 +31,29 @@ jobs:
       - run: npm ci
       - run: npm run build
       - run: npm test
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: './build'
 
+  # Deployment job
+  deploy:
+    # Add a dependency to the build job
+    needs: build
+    # Grant permissions to the GITHUB_TOKEN to allow deployment to GitHub Pages
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+
+    # Deploy to the environment github-pages
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    
+    runs-on: ubuntu-latest
+    
+    steps: 
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy/pages@v1 
