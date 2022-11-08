@@ -1,5 +1,6 @@
 {
   "name": "my-react-test",
+  "homepage": "https://kaisitah.github.io/favorite-color-app",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
